@@ -13,14 +13,17 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: #1a0a0a;
+  background: #1a0808;
   font-family: "Cormorant Garamond", Georgia, serif;
   color: #e8d5a3;
+  /* evita que un stacking context tape el canvas */
+  isolation: auto;
 }
 
 #webgl {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   display: block;
@@ -28,6 +31,7 @@ body {
   outline: none;
   cursor: grab;
   background: #1a0808;
+  /* nunca usar z-index negativo: queda bajo el fondo del body */
 }
 
 #webgl:active {
@@ -37,11 +41,12 @@ body {
 #ui {
   position: fixed;
   inset: 0;
-  z-index: 1;
+  z-index: 2;
   pointer-events: none;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: transparent;
 }
 
 #title-bar {

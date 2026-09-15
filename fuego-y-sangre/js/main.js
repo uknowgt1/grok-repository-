@@ -36,7 +36,7 @@ renderer.toneMappingExposure = 1.05;
 const scene = new THREE.Scene();
 // Fondo rojo oscuro / ceniza + niebla épica
 scene.background = new THREE.Color(0x1a0808);
-scene.fog = new THREE.FogExp2(0x1a0c0c, 0.018);
+scene.fog = new THREE.FogExp2(0x1a0c0c, 0.012);
 
 const camera = new THREE.PerspectiveCamera(
   50,
@@ -62,14 +62,14 @@ controls.update();
 // ---------------------------------------------------------------------------
 // Lighting — dramática, antorchas, hemisferio
 // ---------------------------------------------------------------------------
-const ambient = new THREE.AmbientLight(0x3a2020, 0.35);
+const ambient = new THREE.AmbientLight(0x3a2020, 0.55);
 scene.add(ambient);
 
-const hemi = new THREE.HemisphereLight(0xff6a3a, 0x1a0a08, 0.45);
+const hemi = new THREE.HemisphereLight(0xff6a3a, 0x1a0a08, 0.65);
 hemi.position.set(0, 40, 0);
 scene.add(hemi);
 
-const sun = new THREE.DirectionalLight(0xff5520, 1.35);
+const sun = new THREE.DirectionalLight(0xff5520, 1.6);
 sun.position.set(-25, 35, 15);
 sun.castShadow = true;
 sun.shadow.mapSize.set(2048, 2048);
@@ -669,11 +669,12 @@ function animate() {
 // Boot
 // ---------------------------------------------------------------------------
 (async function init() {
+  // Pintar desde ya (fallback ground + luces) aunque los modelos tarden
+  animate();
   await Promise.all([setupCastle(), setupDragon()]);
   // Centrar orbit target en el castillo
   controls.target.set(0, 5, -2);
   controls.update();
 
   if (loadingEl) loadingEl.classList.add('hidden');
-  animate();
 })();
