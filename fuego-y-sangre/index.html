@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fuego y Sangre — House of the Dragon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/styles.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="ui">
+    <header id="title-bar">
+      <h1>Fuego y Sangre</h1>
+      <p class="subtitle">Casa Targaryen · Fuego y Sangre</p>
+    </header>
+
+    <div id="loading" aria-live="polite">
+      <div class="loading-ember"></div>
+      <span>Cargando el reino…</span>
+    </div>
+
+    <div id="hint">Haz clic en el dragón o el castillo · Arrastra para orbitar</div>
+  </div>
+
+  <!-- Modal: pergamino oscuro con lore de la Casa Targaryen -->
+  <div id="modal-backdrop" class="hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div id="modal">
+      <button id="modal-close" type="button" aria-label="Cerrar">&times;</button>
+      <h2 id="modal-title">Fuego y Sangre</h2>
+      <p class="modal-motto">« Fire and Blood »</p>
+      <div class="modal-body">
+        <p>
+          La Casa Targaryen, descendientes de Valyria la Antigua, forjó su imperio
+          a lomos de dragones. Su lema — <em>Fuego y Sangre</em> — recuerda que el
+          poder de los Señores de Dragones se mide en llamas y en el precio que
+          cobra la corona.
+        </p>
+        <p>
+          Desde Desembarco del Rey hasta Dragonstone, las alas negras y escarlata
+          de la Casa del Dragón marcaron la historia de Poniente. En la danza de
+          tronos, solo el fuego decide quién reina… y quién arde.
+        </p>
+      </div>
+      <p class="modal-sigil">⚔ 🔥 ⚔</p>
+    </div>
+  </div>
+
+  <canvas id="webgl"></canvas>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
