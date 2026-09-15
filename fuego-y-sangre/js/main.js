@@ -31,12 +31,12 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.05;
+renderer.toneMappingExposure = 1.3;
 
 const scene = new THREE.Scene();
 // Fondo rojo oscuro / ceniza + niebla épica
-scene.background = new THREE.Color(0x1a0808);
-scene.fog = new THREE.FogExp2(0x1a0c0c, 0.012);
+scene.background = new THREE.Color(0x2a1010);
+scene.fog = new THREE.FogExp2(0x1a0c0c, 0.004);
 
 const camera = new THREE.PerspectiveCamera(
   50,
@@ -44,7 +44,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   200
 );
-camera.position.set(18, 12, 28);
+camera.position.set(14, 9, 20);
 
 // ---------------------------------------------------------------------------
 // Controls — límites para mantener el castillo a la vista
@@ -52,24 +52,24 @@ camera.position.set(18, 12, 28);
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
 controls.dampingFactor = 0.06;
-controls.minDistance = 12;
-controls.maxDistance = 55;
+controls.minDistance = 8;
+controls.maxDistance = 45;
 controls.minPolarAngle = Math.PI * 0.15;
 controls.maxPolarAngle = Math.PI * 0.48; // no mirar demasiado desde abajo
-controls.target.set(0, 4, 0);
+controls.target.set(0, 5, -2);
 controls.update();
 
 // ---------------------------------------------------------------------------
 // Lighting — dramática, antorchas, hemisferio
 // ---------------------------------------------------------------------------
-const ambient = new THREE.AmbientLight(0x3a2020, 0.55);
+const ambient = new THREE.AmbientLight(0x4a3030, 0.8);
 scene.add(ambient);
 
-const hemi = new THREE.HemisphereLight(0xff6a3a, 0x1a0a08, 0.65);
+const hemi = new THREE.HemisphereLight(0xff8a4a, 0x2a1010, 0.9);
 hemi.position.set(0, 40, 0);
 scene.add(hemi);
 
-const sun = new THREE.DirectionalLight(0xff5520, 1.6);
+const sun = new THREE.DirectionalLight(0xff6630, 2.0);
 sun.position.set(-25, 35, 15);
 sun.castShadow = true;
 sun.shadow.mapSize.set(2048, 2048);
@@ -109,7 +109,7 @@ const torches = torchPositions.map(([x, y, z]) => {
 // Ground — piedra volcánica oscura
 // ---------------------------------------------------------------------------
 const groundMat = new THREE.MeshStandardMaterial({
-  color: 0x1c1210,
+  color: 0x3a2a24,
   roughness: 0.95,
   metalness: 0.05,
 });
@@ -122,34 +122,34 @@ scene.add(ground);
 // Materiales compartidos (fallback procedural)
 // ---------------------------------------------------------------------------
 const volcanicStone = new THREE.MeshStandardMaterial({
-  color: 0x2a2220,
+  color: 0x5a4a42,
   roughness: 0.88,
   metalness: 0.08,
 });
 
 const volcanicDark = new THREE.MeshStandardMaterial({
-  color: 0x1a1412,
+  color: 0x3d322c,
   roughness: 0.92,
   metalness: 0.05,
 });
 
 const dragonScale = new THREE.MeshStandardMaterial({
-  color: 0x2a0808,
+  color: 0x6a1818,
   roughness: 0.55,
   metalness: 0.25,
-  emissive: 0x1a0505,
-  emissiveIntensity: 0.15,
+  emissive: 0x3a0808,
+  emissiveIntensity: 0.45,
 });
 
 const wingMembrane = new THREE.MeshStandardMaterial({
-  color: 0x4a1010,
+  color: 0x6a2020,
   roughness: 0.7,
   metalness: 0.1,
   side: THREE.DoubleSide,
   transparent: true,
   opacity: 0.85,
-  emissive: 0x220808,
-  emissiveIntensity: 0.1,
+  emissive: 0x3a1010,
+  emissiveIntensity: 0.25,
 });
 
 // ---------------------------------------------------------------------------
@@ -223,7 +223,7 @@ function buildProceduralCastle() {
 
   // Techos cónicos
   const coneMat = new THREE.MeshStandardMaterial({
-    color: 0x3a1010,
+    color: 0x5a2020,
     roughness: 0.7,
     metalness: 0.15,
   });
@@ -260,6 +260,7 @@ function buildProceduralCastle() {
   }
 
   group.position.set(0, 0, -4);
+  group.scale.setScalar(1.15);
   return group;
 }
 
@@ -368,9 +369,9 @@ function buildProceduralDragon() {
     group.add(eye);
   });
 
-  group.position.set(-6, 5.5, 10);
+  group.position.set(-4, 5.5, 8);
   group.rotation.y = Math.PI * 0.35;
-  group.scale.setScalar(1.15);
+  group.scale.setScalar(1.75);
   return group;
 }
 
